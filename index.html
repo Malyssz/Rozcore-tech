@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Rozcore Tech — automatyzacja dla firm w Polsce</title>
+<meta name="description" content="Pomagam firmom w Polsce zautomatyzować konkretne, powtarzalne zadania — od jednego, tanio sprawdzonego pilota.">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pl_PL">
+<meta property="og:title" content="Rozcore Tech — automatyzacja dla firm w Polsce">
+<meta property="og:description" content="Pomagam firmom w Polsce zautomatyzować konkretne, powtarzalne zadania — od jednego, tanio sprawdzonego pilota.">
+<meta property="og:url" content="https://rozcore-tech.pl/">
+<meta property="og:image" content="https://rozcore-tech.pl/og-rozcore.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Rozcore Tech — automatyzacja dla firm w Polsce">
+<meta name="twitter:description" content="Pomagam firmom w Polsce zautomatyzować konkretne, powtarzalne zadania — od jednego, tanio sprawdzonego pilota.">
+<meta name="twitter:image" content="https://rozcore-tech.pl/og-rozcore.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='32' fill='none' stroke='%2335506F' stroke-width='9'/%3E%3Ccircle cx='50' cy='50' r='11' fill='%23C06634'/%3E%3Cline x1='50' y1='2' x2='50' y2='20' stroke='%2335506F' stroke-width='9' stroke-linecap='round'/%3E%3Cline x1='50' y1='80' x2='50' y2='98' stroke='%2335506F' stroke-width='9' stroke-linecap='round'/%3E%3Cline x1='2' y1='50' x2='20' y2='50' stroke='%2335506F' stroke-width='9' stroke-linecap='round'/%3E%3Cline x1='80' y1='50' x2='98' y2='50' stroke='%2335506F' stroke-width='9' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --ink: #14161b;
+    --surface: #1b1e24;
+    --surface-2: #23262e;
+    --text: #eef0f2;
+    --text-soft: #a6acb8;
+    --text-faint: #6e7483;
+    --border: #30343d;
+    --blue: #4d72a0;
+    --blue-strong: #628bbd;
+    --orange: #d97a3f;
+    --orange-strong: #e8935c;
+    --on-orange: #1a0f08;
+    --on-blue: #0d141c;
+    --focus: #d97a3f;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --ink: #f3f1ec;
+      --surface: #ffffff;
+      --surface-2: #ece7dc;
+      --text: #1b1e23;
+      --text-soft: #4b505c;
+      --text-faint: #7b808c;
+      --border: #ddd7c8;
+      --blue: #35506f;
+      --blue-strong: #24405c;
+      --orange: #c06634;
+      --orange-strong: #a1521f;
+      --on-orange: #fff6ef;
+      --on-blue: #f1f5fa;
+      --focus: #c06634;
+    }
+  }
+  :root[data-theme="light"] {
+    --ink: #f3f1ec;
+    --surface: #ffffff;
+    --surface-2: #ece7dc;
+    --text: #1b1e23;
+    --text-soft: #4b505c;
+    --text-faint: #7b808c;
+    --border: #ddd7c8;
+    --blue: #35506f;
+    --blue-strong: #24405c;
+    --orange: #c06634;
+    --orange-strong: #a1521f;
+    --on-orange: #fff6ef;
+    --on-blue: #f1f5fa;
+    --focus: #c06634;
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--ink);
+    color: var(--text);
+    font-family: 'Hanken Grotesk', system-ui, sans-serif;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3 {
+    font-family: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.005em;
+    line-height: 0.98;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--text);
+  }
+  p { margin: 0; }
+  a { color: inherit; }
+  ::selection { background: var(--orange); color: var(--on-orange); }
+  a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible {
+    outline: 2px solid var(--focus);
+    outline-offset: 3px;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+  }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 28px; }
+  .mono { font-family: 'IBM Plex Mono', ui-monospace, monospace; }
+  .eyebrow {
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: 0.74rem;
+    font-weight: 500;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--orange);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .eyebrow::before { content: "//"; color: var(--text-faint); }
+
+  /* ---------- header ---------- */
+  header.site {
+    position: sticky; top: 0; z-index: 40;
+    background: color-mix(in srgb, var(--ink) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  header.site .wrap {
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 20px; padding-top: 16px; padding-bottom: 16px;
+  }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .brand svg { flex-shrink: 0; }
+  .brand .wordmark {
+    font-family: 'Barlow Condensed', sans-serif;
+    font-weight: 800;
+    font-size: 1.32rem;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+  }
+  .brand .wordmark span { color: var(--blue); font-weight: 600; }
+  nav.primary { display: flex; align-items: center; gap: 6px; }
+  nav.primary a {
+    text-decoration: none; color: var(--text-soft); font-weight: 600;
+    font-size: 0.92rem; padding: 9px 13px; border-radius: 4px;
+    transition: color 0.15s ease, background 0.15s ease;
+  }
+  nav.primary a:hover { color: var(--text); background: var(--surface); }
+  .header-right { display: flex; align-items: center; gap: 10px; }
+  .menu-toggle {
+    display: none; flex-direction: column; justify-content: center; gap: 5px;
+    width: 38px; height: 38px; background: transparent; border: 1.5px solid var(--border);
+    border-radius: 4px; cursor: pointer; padding: 0; align-items: center;
+  }
+  .menu-toggle span { width: 18px; height: 2px; background: var(--text); display: block; transition: transform 0.2s ease, opacity 0.2s ease; }
+  .menu-toggle[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+  .menu-toggle[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+  .menu-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+  .btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    text-decoration: none; font-weight: 700; font-size: 0.92rem;
+    padding: 12px 20px; border-radius: 3px; border: none; cursor: pointer;
+    font-family: inherit;
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .btn:active { transform: translateY(1px); }
+  .btn--primary { background: var(--orange); color: var(--on-orange); }
+  .btn--primary:hover { background: var(--orange-strong); }
+  .btn--ghost { background: transparent; border: 1.5px solid var(--border); color: var(--text); }
+  .btn--ghost:hover { border-color: var(--text-faint); }
+  .btn--block { width: 100%; justify-content: center; padding: 14px 20px; font-size: 0.98rem; }
+
+  /* ---------- hero ---------- */
+  .hero { position: relative; overflow: hidden; border-bottom: 1px solid var(--border); }
+  .hero-inner {
+    position: relative; z-index: 1;
+    padding: 76px 0 72px;
+    display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 20px; align-items: center;
+  }
+  .hero h1 {
+    margin-top: 16px;
+    font-size: clamp(2.5rem, 4.6vw, 3.9rem);
+  }
+  .hero h1 .hl { color: var(--orange); }
+  .hero-sub {
+    margin-top: 20px; max-width: 54ch; color: var(--text-soft); font-size: 1.08rem;
+  }
+  .hero-ctas { display: flex; gap: 12px; margin-top: 30px; flex-wrap: wrap; }
+  .hero-reticle {
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .hero-reticle svg { width: 100%; max-width: 420px; height: auto; }
+  .reticle-spin { animation: spin 70s linear infinite; transform-origin: 210px 210px; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .hero-reticle .tag {
+    position: absolute; font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem;
+    color: var(--text-faint); letter-spacing: 0.08em;
+  }
+  .hero-reticle .tag--nw { top: 6%; left: 2%; }
+  .hero-reticle .tag--se { bottom: 6%; right: 2%; }
+
+  /* ---------- sections ---------- */
+  .section { padding: 72px 0; border-bottom: 1px solid var(--border); }
+  .section-head { max-width: 62ch; margin-bottom: 40px; }
+  .section-head h2 { font-size: clamp(1.9rem, 3.4vw, 2.6rem); margin-top: 12px; }
+  .section-head p { color: var(--text-soft); margin-top: 14px; font-size: 1.02rem; }
+
+  /* intro / "dlaczego inaczej" */
+  .intro-block { max-width: 76ch; }
+  .intro-block .lead { font-size: 1.14rem; font-weight: 600; color: var(--text); }
+  .intro-block p + p { margin-top: 18px; color: var(--text-soft); font-size: 1rem; }
+  .intro-block .lead + p { margin-top: 18px; }
+
+  /* quote / differentiation panel */
+  .quote-panel {
+    border-left: 3px solid var(--orange);
+    background: var(--surface);
+    border-radius: 0 8px 8px 0;
+    padding: 30px 34px;
+    max-width: 76ch;
+    font-size: 1.1rem;
+    font-weight: 500;
+    color: var(--text);
+    line-height: 1.65;
+  }
+
+  /* services */
+  .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .service-card { background: var(--surface); padding: 28px; display: flex; flex-direction: column; gap: 16px; }
+  .service-card .tag-row { display: flex; align-items: center; gap: 12px; }
+  .service-card .num { font-family: 'IBM Plex Mono', monospace; color: var(--blue); font-size: 0.82rem; border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; }
+  .service-card h3 { font-size: 1.5rem; text-transform: none; font-weight: 700; letter-spacing: 0; }
+  .service-card > p { color: var(--text-soft); font-size: 0.98rem; }
+  .service-card ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 11px; }
+  .service-card li { display: flex; gap: 10px; font-size: 0.92rem; color: var(--text-soft); align-items: baseline; }
+  .service-card li::before { content: "▸"; color: var(--orange); flex-shrink: 0; }
+  .parp-note {
+    margin-top: 4px; display: flex; align-items: flex-start; gap: 9px;
+    font-size: 0.84rem; color: var(--text-faint); border-top: 1px solid var(--border); padding-top: 16px;
+  }
+  .parp-note .dot { color: var(--blue); flex-shrink: 0; }
+
+  /* process */
+  .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+  .process-step { position: relative; padding-top: 18px; border-top: 2px solid var(--border); }
+  .process-step .num { font-family: 'IBM Plex Mono', monospace; color: var(--orange); font-size: 0.8rem; }
+  .process-step h3 { font-size: 1.3rem; margin-top: 10px; text-transform: none; font-weight: 700; letter-spacing: 0; }
+  .process-step p { margin-top: 8px; color: var(--text-soft); font-size: 0.92rem; }
+
+  /* checklist (dla kogo) */
+  .checklist { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .checklist li { background: var(--surface); padding: 20px 24px; display: flex; gap: 14px; align-items: baseline; font-size: 1rem; color: var(--text); }
+  .checklist li .chk { color: var(--orange); font-family: 'IBM Plex Mono', monospace; font-weight: 700; flex-shrink: 0; }
+
+  /* faq */
+  .faq-list { display: grid; gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .faq-item { background: var(--surface); }
+  .faq-item summary {
+    cursor: pointer; padding: 20px 24px; font-weight: 700; font-size: 1.02rem;
+    display: flex; justify-content: space-between; align-items: center; gap: 16px;
+    list-style: none;
+  }
+  .faq-item summary::-webkit-details-marker { display: none; }
+  .faq-item summary .plus { font-family: 'IBM Plex Mono', monospace; color: var(--orange); font-size: 1.1rem; flex-shrink: 0; transition: transform 0.2s ease; }
+  .faq-item[open] summary .plus { transform: rotate(45deg); }
+  .faq-item .faq-a { padding: 0 24px 22px; color: var(--text-soft); font-size: 0.95rem; max-width: 68ch; }
+
+  /* contact */
+  .contact-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 48px; }
+  .contact-info h2 { font-size: clamp(1.9rem, 3.4vw, 2.6rem); margin-top: 12px; }
+  .contact-info p { color: var(--text-soft); margin-top: 16px; font-size: 1.02rem; max-width: 42ch; }
+  .contact-direct { margin-top: 28px; display: grid; gap: 12px; }
+  .contact-direct a {
+    text-decoration: none; color: var(--text); font-weight: 600; font-size: 1.05rem;
+    display: inline-flex; align-items: center; gap: 10px;
+  }
+  .contact-direct a:hover { color: var(--orange); }
+  .contact-direct span.plain { font-weight: 600; font-size: 1.05rem; display: inline-flex; align-items: center; gap: 10px; }
+  .contact-direct .lbl { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; color: var(--text-faint); width: 62px; flex-shrink: 0; }
+
+  form#contact-form { background: var(--surface); border: 1px solid var(--border); border-radius: 8px; padding: 30px; display: grid; gap: 18px; }
+  .field-row { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+  .field { display: grid; gap: 7px; }
+  .field label { font-family: 'IBM Plex Mono', monospace; font-size: 0.72rem; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-faint); }
+  .field input, .field textarea {
+    background: var(--surface-2); border: 1px solid var(--border); border-radius: 4px;
+    padding: 12px 13px; color: var(--text); font-family: inherit; font-size: 0.96rem;
+  }
+  .field input::placeholder, .field textarea::placeholder { color: var(--text-faint); }
+  .field textarea { resize: vertical; min-height: 90px; }
+  .hp-field { position: absolute; left: -9999px; }
+  .form-note { font-size: 0.82rem; color: var(--text-faint); }
+  #form-status { font-size: 0.92rem; font-weight: 600; min-height: 1.2em; }
+  #form-status.ok { color: #7fb77e; }
+  #form-status.err { color: var(--orange); }
+
+  /* footer */
+  footer.site { padding: 44px 0 36px; }
+  footer.site .wrap { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  footer.site .brand .wordmark { font-size: 1.1rem; }
+  footer.site .f-right { display: flex; align-items: center; gap: 22px; font-size: 0.85rem; color: var(--text-faint); flex-wrap: wrap; }
+  footer.site .f-right a { text-decoration: none; color: var(--text-faint); }
+  footer.site .f-right a:hover { color: var(--orange); }
+
+  @media (max-width: 1080px) and (min-width: 921px) {
+    .service-grid { grid-template-columns: 1fr 1fr; }
+    .service-card:last-child { grid-column: 1 / -1; }
+  }
+  @media (max-width: 920px) {
+    .hero-inner { grid-template-columns: 1fr; }
+    .hero-reticle { display: none; }
+    .service-grid { grid-template-columns: 1fr; }
+    .process-grid { grid-template-columns: 1fr 1fr; }
+    .contact-grid { grid-template-columns: 1fr; }
+    .menu-toggle { display: flex; }
+    nav.primary {
+      display: none; position: absolute; top: 100%; left: 0; right: 0;
+      flex-direction: column; gap: 2px; background: var(--surface);
+      border-bottom: 1px solid var(--border); padding: 10px 28px 16px;
+    }
+    nav.primary.open { display: flex; }
+    nav.primary a { padding: 12px 10px; }
+    header.site .wrap { position: relative; }
+  }
+  @media (max-width: 560px) {
+    .wrap { padding: 0 18px; }
+    .process-grid { grid-template-columns: 1fr; }
+    .field-row { grid-template-columns: 1fr; }
+    footer.site .wrap { flex-direction: column; align-items: flex-start; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg width="34" height="34" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="32" stroke="var(--blue)" stroke-width="9"/>
+        <circle cx="50" cy="50" r="11" fill="var(--orange)"/>
+        <line x1="50" y1="2" x2="50" y2="20" stroke="var(--blue)" stroke-width="9" stroke-linecap="round"/>
+        <line x1="50" y1="80" x2="50" y2="98" stroke="var(--blue)" stroke-width="9" stroke-linecap="round"/>
+        <line x1="2" y1="50" x2="20" y2="50" stroke="var(--blue)" stroke-width="9" stroke-linecap="round"/>
+        <line x1="80" y1="50" x2="98" y2="50" stroke="var(--blue)" stroke-width="9" stroke-linecap="round"/>
+      </svg>
+      <span class="wordmark">Rozcore <span>Tech</span></span>
+    </a>
+    <nav class="primary" id="primary-nav" aria-label="Menu główne">
+      <a href="#jak-dziala">Jak pracuję</a>
+      <a href="#uslugi">Usługi</a>
+      <a href="#faq">FAQ</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+    <div class="header-right">
+      <a class="btn btn--primary" href="#kontakt">Zostaw kontakt</a>
+      <button class="menu-toggle" id="menu-toggle" aria-label="Otwórz menu" aria-expanded="false" aria-controls="primary-nav">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+  <section class="hero">
+    <div class="wrap hero-inner">
+      <div>
+        <span class="eyebrow">Automatyzacja dla firm w Polsce</span>
+        <h1>Trafiamy dokładnie w&nbsp;to, co w&nbsp;Twojej firmie zabiera <span class="hl">najwięcej czasu.</span></h1>
+        <p class="hero-sub">Pomagam firmom w Polsce, od małych po duże, zautomatyzować konkretne, powtarzalne zadania — bez wielkich wdrożeń, bez zgadywania, co „może się przydać". Zaczynamy od jednego, tanio sprawdzonego pilota.</p>
+        <div class="hero-ctas">
+          <a class="btn btn--primary" href="#kontakt">Zostaw kontakt, nazwę firmy i dyspozycyjność →</a>
+          <a class="btn btn--ghost" href="#jak-dziala">Zobacz, jak pracuję</a>
+        </div>
+      </div>
+      <div class="hero-reticle" aria-hidden="true">
+        <svg viewBox="0 0 420 420" width="420" height="420">
+          <g class="reticle-spin">
+            <circle cx="210" cy="210" r="160" fill="none" stroke="var(--border)" stroke-width="1.5"/>
+            <circle cx="210" cy="210" r="128" fill="none" stroke="var(--blue)" stroke-width="2" stroke-dasharray="4 10"/>
+            <line x1="210" y1="20" x2="210" y2="70" stroke="var(--blue)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="210" y1="350" x2="210" y2="400" stroke="var(--blue)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="20" y1="210" x2="70" y2="210" stroke="var(--blue)" stroke-width="3" stroke-linecap="round"/>
+            <line x1="350" y1="210" x2="400" y2="210" stroke="var(--blue)" stroke-width="3" stroke-linecap="round"/>
+          </g>
+          <circle cx="210" cy="210" r="86" fill="none" stroke="var(--border)" stroke-width="1.5"/>
+          <circle cx="210" cy="210" r="20" fill="var(--orange)"/>
+        </svg>
+        <span class="tag tag--nw mono">// SKANOWANIE</span>
+        <span class="tag tag--se mono">CEL: RUTYNA</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="jak-dziala">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Proces</span>
+        <h2>Jak wygląda współpraca.</h2>
+      </div>
+      <div class="process-grid">
+        <div class="process-step">
+          <span class="num mono">01</span>
+          <h3>Rozmowa i diagnoza</h3>
+          <p>Krótka, bezpłatna rozmowa o tym, jak dziś wygląda Twoja firma — jakie procesy są ręczne, powtarzalne, zajmują najwięcej czasu. Żadnej sprzedaży na tym etapie.</p>
+        </div>
+        <div class="process-step">
+          <span class="num mono">02</span>
+          <h3>Jeden, konkretny pilot</h3>
+          <p>Wybieramy JEDEN proces o niskim ryzyku i jasnym efekcie — nie całą firmę na raz. Tani, szybki do wdrożenia, łatwy do oceny.</p>
+        </div>
+        <div class="process-step">
+          <span class="num mono">03</span>
+          <h3>Ocena efektu</h3>
+          <p>Sprawdzamy razem, czy pilot się sprawdził — ile czasu i pracy faktycznie oszczędza. Dopiero na tym etapie rozmawiamy o rozszerzeniu na inne procesy.</p>
+        </div>
+        <div class="process-step">
+          <span class="num mono">04</span>
+          <h3>Rozszerzenie</h3>
+          <p>Jeśli pilot się sprawdził — rozszerzamy na kolejne obszary, w tempie, który ma sens dla Twojej firmy, nie dla mojego kalendarza sprzedażowego.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="uslugi">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Usługi</span>
+        <h2>Trzy rodzaje wsparcia.</h2>
+      </div>
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="tag-row"><span class="num">A</span></div>
+          <h3>Diagnoza i doradztwo</h3>
+          <p>Dla firm, które nie wiedzą jeszcze, co i czy warto automatyzować. Analizuję Twoje procesy, wskazuję konkretne miejsca z realnym potencjałem automatyzacji — i mówię szczerze, gdzie AI nie ma sensu, zamiast sprzedawać Ci coś niepotrzebnego.</p>
+          <div class="parp-note">
+            <span class="dot">●</span>
+            <span>Diagnoza może kwalifikować się do dofinansowania w ramach programu PARP „Kompetencje z automatyzacji dla transformacji cyfrowej" (Makroregion 5 — Podkarpackie). Dokładny poziom dofinansowania i aktualny status naboru sprawdzamy indywidualnie, przy rozmowie.</span>
+          </div>
+        </div>
+        <div class="service-card">
+          <div class="tag-row"><span class="num">B</span></div>
+          <h3>Wdrożenie / budowa</h3>
+          <p>Dla firm, które już wiedzą (albo ustaliliśmy to razem w diagnozie), który proces chcą zautomatyzować. Buduję konkretne narzędzie i wdrażam je krok po kroku, zaczynając od małego pilota.</p>
+          <ul>
+            <li>Automatyczne odczytywanie i kategoryzowanie faktur / dokumentów księgowych</li>
+            <li>Wstępna obsługa zapytań klientów — wielojęzyczna, wielokanałowa</li>
+            <li>Wsparcie przygotowania dokumentacji zgodności (ISO, certyfikaty branżowe)</li>
+            <li>Automatyzacja wstępnej wyceny na podstawie zapytania lub rysunku technicznego</li>
+            <li>Wsparcie kontroli jakości (computer vision) na liniach produkcyjnych</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="tag-row"><span class="num">C</span></div>
+          <h3>Strony internetowe dla firm</h3>
+          <p>Projektuję i buduję strony firmowe — same w sobie, albo jako element automatyzacji (np. formularz, który od razu trafia do Twojego systemu). Jedna osoba ogarnia całość, więc strona i automatyzacja nie gryzą się ze sobą.</p>
+          <ul>
+            <li>Projekt dopasowany do marki, nie odgrzewany z szablonu</li>
+            <li>Formularz kontaktowy, który wyśle zgłoszenie gdzie trzeba</li>
+            <li>Szybki, tani hosting zamiast drogiego, wolnego CMS-a</li>
+            <li>Pełny dostęp do kodu, albo bieżące wprowadzanie zmian, jeśli zajdzie potrzeba</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Dlaczego pracuję inaczej</span>
+        <h2>Sami się odzywamy — nie czekamy na formularz.</h2>
+      </div>
+      <div class="intro-block">
+        <p class="lead">Nie czekam, aż ktoś wypełni formularz kontaktowy i trafi na moją stronę przez przypadek.</p>
+        <p>Sam znajduję i sprawdzam firmy, które realnie mogą skorzystać z automatyzacji — czym się zajmują, jak działają, gdzie tracą najwięcej czasu — i odzywam się pierwszy, z konkretną propozycją dopasowaną do Twojej firmy, nie z gotowym cennikiem skopiowanym z poprzedniej rozmowy.</p>
+        <p>Mam swój sposób pracy, dzięki któremu wdrażam automatyzacje o wiele szybciej niż przy klasycznych, w pełni indywidualnych projektach budowanych od zera. Jak to robię? Z przyjemnością opowiem przy rozmowie.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Dla kogo to ma sens</span>
+        <h2>Sprawdza się, jeśli…</h2>
+      </div>
+      <ul class="checklist">
+        <li><span class="chk">→</span>Masz firmę produkcyjną, transportową, usługową lub handlową w Polsce</li>
+        <li><span class="chk">→</span>Nie masz własnego działu IT i nie chcesz wielkiego, wielomiesięcznego projektu</li>
+        <li><span class="chk">→</span>Wolisz zacząć od małego, sprawdzalnego pilota niż podpisywać umowę na „cyfrową transformację"</li>
+        <li><span class="chk">→</span>Chcesz wiedzieć, ile to realnie będzie kosztować, zanim podejmiesz decyzję o wdrożeniu</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Czym się różnię</span>
+        <h2>Mniej, ale pewne — zamiast dużo i niesprawdzone.</h2>
+      </div>
+      <div class="quote-panel">
+        Nie obiecuję gotowych efektów, zanim sam nie zweryfikuję, że są wykonalne. Jeśli coś wymaga dostępu do danych, których Twoja firma może jeszcze nie mieć w cyfrowej formie — mówię to wprost, zamiast z góry obiecywać „pełną automatyzację". Każda propozycja, którą dostajesz, jest jasno oznaczona: to da się zrobić od razu, a to trzeba wcześniej zweryfikować na miejscu.
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="faq">
+    <div class="wrap">
+      <div class="section-head">
+        <span class="eyebrow">Pytania</span>
+        <h2>Najczęściej pytacie o to.</h2>
+      </div>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>Nie mam działu IT — czy to problem?<span class="plus">+</span></summary>
+          <div class="faq-a">Nie. Większość moich pierwszych pilotów jest zaprojektowana właśnie dla firm bez własnego zespołu technicznego — obsługuję stronę techniczną, Ty skupiasz się na swojej firmie.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Czy to drogie?<span class="plus">+</span></summary>
+          <div class="faq-a">Zaczynamy od małego, tanio skalibrowanego pilota, nie od dużego kontraktu. Dokładny koszt zależy od zakresu — ustalamy go po diagnozie, nie z góry.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Czy AI zastąpi moich pracowników?<span class="plus">+</span></summary>
+          <div class="faq-a">Nie — moje podejście polega na wsparciu zespołu w powtarzalnych, nużących zadaniach, nie na zastępowaniu ludzi. Dobrze zrobiona automatyzacja daje Twoim pracownikom więcej czasu na rzeczy, w których są naprawdę potrzebni.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Nie wiem, co w mojej firmie warto zautomatyzować<span class="plus">+</span></summary>
+          <div class="faq-a">Właśnie od tego jest pierwsza, bezpłatna rozmowa — razem znajdziemy konkretny, sensowny punkt startowy.</div>
+        </details>
+        <details class="faq-item">
+          <summary>Mam w głowie coś, co sam chciałbym zautomatyzować, ale nie wiem, czy to w ogóle możliwe<span class="plus">+</span></summary>
+          <div class="faq-a">Jestem zdania, że praktycznie wszystko da się zautomatyzować — to nie kwestia tego, czy jest to możliwe, tylko ile czasu zajmie wykonanie. Powiedz mi, o czym myślisz, a ja powiem Ci, jak długo by to realnie trwało.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="kontakt" style="border-bottom:none;">
+    <div class="wrap">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <span class="eyebrow">Zacznijmy od rozmowy, nie od oferty</span>
+          <h2>20 minut wystarczy.</h2>
+          <p>Nie wysyłam gotowych ofert bez rozmowy. Napisz lub zadzwoń — 20 minut wystarczy, żeby ustalić, czy w Twojej firmie jest coś, co faktycznie warto zautomatyzować.</p>
+          <div class="contact-direct">
+            <a href="tel:+48794163435"><span class="lbl mono">TEL</span>794 163 435</a>
+            <a href="mailto:rozcoretech@gmail.com"><span class="lbl mono">MAIL</span>rozcoretech@gmail.com</a>
+            <span class="plain"><span class="lbl mono">GDZIE</span>Rzeszów, Podkarpacie</span>
+          </div>
+        </div>
+
+        <form id="contact-form">
+          <input type="hidden" name="access_key" value="c32e1172-969f-4ba0-9e52-224155dfb5e1">
+          <input type="hidden" name="subject" value="Nowe zgłoszenie ze strony Rozcore Tech">
+          <input type="hidden" name="from_name" value="Formularz kontaktowy — Rozcore Tech">
+          <p class="hp-field"><label>Nie wypełniaj tego pola: <input name="botcheck"></label></p>
+
+          <div class="field-row">
+            <div class="field">
+              <label for="f-name">Imię i nazwisko*</label>
+              <input id="f-name" name="imie" type="text" required placeholder="Jan Kowalski">
+            </div>
+            <div class="field">
+              <label for="f-company">Nazwa firmy*</label>
+              <input id="f-company" name="firma" type="text" required placeholder="Nazwa firmy">
+            </div>
+          </div>
+          <div class="field-row">
+            <div class="field">
+              <label for="f-phone">Telefon*</label>
+              <input id="f-phone" name="telefon" type="tel" required placeholder="+48 ...">
+            </div>
+            <div class="field">
+              <label for="f-email">Email (opcjonalnie)</label>
+              <input id="f-email" name="email" type="email" placeholder="jan@firma.pl">
+            </div>
+          </div>
+          <div class="field">
+            <label for="f-availability">Dogodny termin kontaktu (opcjonalnie)</label>
+            <input id="f-availability" name="dyspozycyjnosc" type="text" placeholder="np. pon–pt po 16:00">
+          </div>
+          <div class="field">
+            <label for="f-message">Wiadomość (opcjonalnie)</label>
+            <textarea id="f-message" name="wiadomosc" placeholder="Czym się zajmujecie / co chcielibyście zautomatyzować?"></textarea>
+          </div>
+          <button class="btn btn--primary btn--block" type="submit">Zostaw kontakt →</button>
+          <p id="form-status" role="status"></p>
+          <p class="form-note">Administratorem danych jest Rozcore Tech, Rzeszów (kontakt: rozcoretech@gmail.com). Dane z formularza przetwarzam wyłącznie w celu odpowiedzi na zapytanie (art. 6 ust. 1 lit. b i f RODO) i przechowuję nie dłużej niż jest to potrzebne do kontaktu. Masz prawo do wglądu w swoje dane, ich poprawienia, usunięcia oraz wniesienia skargi do Prezesa UODO.</p>
+        </form>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    <a class="brand" href="#top">
+      <svg width="26" height="26" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="32" stroke="var(--blue)" stroke-width="9"/>
+        <circle cx="50" cy="50" r="11" fill="var(--orange)"/>
+        <line x1="50" y1="2" x2="50" y2="20" stroke="var(--blue)" stroke-width="9" stroke-linecap="round"/>
+        <line x1="50" y1="80" x2="50" y2="98" stroke="var(--blue)" stroke-width="9" stroke-linecap="round"/>
+        <line x1="2" y1="50" x2="20" y2="50" stroke="var(--blue)" stroke-width="9" stroke-linecap="round"/>
+        <line x1="80" y1="50" x2="98" y2="50" stroke="var(--blue)" stroke-width="9" stroke-linecap="round"/>
+      </svg>
+      <span class="wordmark">Rozcore <span>Tech</span></span>
+    </a>
+    <div class="f-right">
+      <span>© 2026 Rozcore Tech, Rzeszów</span>
+      <a href="tel:+48794163435">794 163 435</a>
+      <a href="mailto:rozcoretech@gmail.com">rozcoretech@gmail.com</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  var menuToggle = document.getElementById('menu-toggle');
+  var primaryNav = document.getElementById('primary-nav');
+  menuToggle.addEventListener('click', function(){
+    var isOpen = primaryNav.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  });
+  primaryNav.addEventListener('click', function(e){
+    if (e.target.tagName === 'A') {
+      primaryNav.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  var form = document.getElementById('contact-form');
+  var formStatus = document.getElementById('form-status');
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    var fd = new FormData(form);
+    var payload = {};
+    fd.forEach(function(v,k){ payload[k] = v; });
+    formStatus.textContent = "Wysyłanie...";
+    formStatus.className = "";
+    fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "Accept": "application/json" },
+      body: JSON.stringify(payload)
+    }).then(function(res){ return res.json().then(function(data){ return { ok: res.ok, data: data }; }); })
+      .then(function(result){
+        if (!result.ok || !result.data.success) { throw new Error(result.data && result.data.message); }
+        formStatus.textContent = "Dzięki! Odezwę się najszybciej, jak mogę.";
+        formStatus.className = "ok";
+        form.reset();
+      }).catch(function(){
+        formStatus.textContent = "Coś poszło nie tak — zadzwoń proszę pod 794 163 435 albo napisz na rozcoretech@gmail.com.";
+        formStatus.className = "err";
+      });
+  });
+</script>
+
+</body>
+</html>
