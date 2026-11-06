@@ -222,7 +222,7 @@
   }
 
   /* services */
-  .service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
+  .service-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; }
   .service-card { background: var(--surface); padding: 28px; display: flex; flex-direction: column; gap: 16px; }
   .service-card .tag-row { display: flex; align-items: center; gap: 12px; }
   .service-card .num { font-family: 'IBM Plex Mono', monospace; color: var(--blue); font-size: 0.82rem; border: 1px solid var(--border); border-radius: 20px; padding: 3px 10px; }
@@ -299,10 +299,6 @@
   footer.site .f-right a { text-decoration: none; color: var(--text-faint); }
   footer.site .f-right a:hover { color: var(--orange); }
 
-  @media (max-width: 1080px) and (min-width: 921px) {
-    .service-grid { grid-template-columns: 1fr 1fr; }
-    .service-card:last-child { grid-column: 1 / -1; }
-  }
   @media (max-width: 920px) {
     .hero-inner { grid-template-columns: 1fr; }
     .hero-reticle { display: none; }
@@ -424,7 +420,7 @@
     <div class="wrap">
       <div class="section-head">
         <span class="eyebrow">Usługi</span>
-        <h2>Trzy rodzaje wsparcia.</h2>
+        <h2>Cztery rodzaje wsparcia.</h2>
       </div>
       <div class="service-grid">
         <div class="service-card">
@@ -450,13 +446,24 @@
         </div>
         <div class="service-card">
           <div class="tag-row"><span class="num">C</span></div>
-          <h3>Strony internetowe dla firm</h3>
-          <p>Projektuję i buduję strony firmowe — same w sobie, albo jako element automatyzacji (np. formularz, który od razu trafia do Twojego systemu). Jedna osoba ogarnia całość, więc strona i automatyzacja nie gryzą się ze sobą.</p>
+          <h3>Strony i aplikacje dla firm</h3>
+          <p>Projektuję i buduję strony firmowe — same w sobie, albo jako element automatyzacji (np. formularz, który od razu trafia do Twojego systemu). Jedna osoba ogarnia całość, więc strona i automatyzacja nie gryzą się ze sobą. Jeśli potrzebujesz czegoś więcej niż strony — prostej aplikacji webowej czy panelu dla klientów — to też budujemy, na zamówienie.</p>
           <ul>
             <li>Projekt dopasowany do marki, nie odgrzewany z szablonu</li>
             <li>Formularz kontaktowy, który wyśle zgłoszenie gdzie trzeba</li>
             <li>Szybki, tani hosting zamiast drogiego, wolnego CMS-a</li>
             <li>Pełny dostęp do kodu, albo bieżące wprowadzanie zmian, jeśli zajdzie potrzeba</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="tag-row"><span class="num">D</span></div>
+          <h3>Cyfryzacja firmy</h3>
+          <p>Dla firm, które wciąż działają na papierze, Excelu i pamięci właściciela. Zanim zacznie się rozmowa o AI, trzeba mieć co automatyzować — pomagam uporządkować procesy i dane firmy w jednym, cyfrowym miejscu.</p>
+          <ul>
+            <li>Audyt obecnych narzędzi i procesów (papier, Excel, luźne systemy)</li>
+            <li>Dobór i wdrożenie gotowych narzędzi cyfrowych — nie zawsze trzeba budować własne</li>
+            <li>Uporządkowanie dokumentacji i danych firmy w jednym miejscu</li>
+            <li>Plan wdrożenia rozłożony na etapy, w tempie Twojej firmy</li>
           </ul>
         </div>
       </div>
@@ -585,7 +592,7 @@
           </div>
           <button class="btn btn--primary btn--block" type="submit">Zostaw kontakt →</button>
           <p id="form-status" role="status"></p>
-          <p class="form-note">Administratorem danych jest Rozcore Tech, Rzeszów (kontakt: rozcoretech@gmail.com). Dane z formularza przetwarzam wyłącznie w celu odpowiedzi na zapytanie (art. 6 ust. 1 lit. b i f RODO) i przechowuję nie dłużej niż jest to potrzebne do kontaktu. Masz prawo do wglądu w swoje dane, ich poprawienia, usunięcia oraz wniesienia skargi do Prezesa UODO.</p>
+          <p class="form-note">Administratorem danych jest Oliwier Sroka, prowadzący działalność gospodarczą pod nazwą Rozcore Tech (NIP: 8133961406), Rzeszów, kontakt: rozcoretech@gmail.com. Dane z formularza przetwarzam wyłącznie w celu odpowiedzi na zapytanie (art. 6 ust. 1 lit. b i f RODO) i przechowuję nie dłużej niż jest to potrzebne do kontaktu. Masz prawo do wglądu w swoje dane, ich poprawienia, usunięcia oraz wniesienia skargi do Prezesa UODO.</p>
         </form>
       </div>
     </div>
@@ -607,7 +614,7 @@
       <span class="wordmark">Rozcore <span>Tech</span></span>
     </a>
     <div class="f-right">
-      <span>© 2026 Rozcore Tech, Rzeszów</span>
+      <span>© 2026 Oliwier Sroka — Rozcore Tech, NIP 8133961406, Rzeszów</span>
       <a href="tel:+48794163435">794 163 435</a>
       <a href="mailto:rozcoretech@gmail.com">rozcoretech@gmail.com</a>
     </div>
