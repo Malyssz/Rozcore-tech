@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://rozcore-tech.pl/sitemap.xml
